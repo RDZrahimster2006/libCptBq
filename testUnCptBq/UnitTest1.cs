@@ -248,5 +248,52 @@ namespace testUnCptBq
             // Assert
             Assert.IsTrue(resultat, "Le compte1 avec un solde de 0 devrait être supérieur au compte2 avec un solde négatif");
         }
+        [TestMethod]
+        public void ClasseBanqueExiste()
+        {
+            //Arranger
+            Type banqueType = typeof(Banque);
+            //Auditer
+            Assert.IsNotNull(banqueType, "La classe Banque n'existe pas.");
+        }
+        [TestMethod]
+        public void ConstructeurBanqueExiste()
+        {
+            // Arranger
+            Type banqueType = typeof(Banque);
+            
+
+            // Agir
+            ConstructorInfo constructeur = banqueType.GetConstructor(Type.EmptyTypes);
+
+            // Assert
+            Assert.IsNotNull(constructeur, "Le constructeur Banque n'existe pas.");
+
+
+        }
+        [TestMethod]
+        public void ToString_ReturnsCorrectFormatBanque()
+        {
+            // Arranger
+            Banque banque = new Banque();
+            Compte compte = new Compte
+            {
+                Numero = 123456,
+                Nom = "toto",
+                Solde = 1000.50m,
+                DecouvertAutorise = -500.00m
+            };
+            banque.AjouteCompte(compte);
+
+            string expected = "numero: 123456 nom: toto solde: 1000,50 decouvert autorisé: -500,00";
+
+            // Agir
+            string result = banque.ToString();
+
+            // Assert
+            Assert.AreEqual(expected, result, "La méthode ToString() ne retourne pas le format attendu.");
+        }
+
+
     }
 }
