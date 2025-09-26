@@ -78,7 +78,12 @@ namespace libCptBq
         /// <returns></returns>
         public override string ToString()
         {
-            return $"numero: {Numero} nom: {Nom} solde: {Solde} decouvert autorisé: {DecouvertAutorise}";
+            string aff =  $"numero: {Numero} nom: {Nom} solde: {Solde} decouvert autorisé: {DecouvertAutorise}";
+            foreach (var m in Mouvements)
+            {
+                aff += ToString();
+            }
+            return aff;
         }
 
 

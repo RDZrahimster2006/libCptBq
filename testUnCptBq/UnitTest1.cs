@@ -372,8 +372,14 @@ namespace testUnCptBq
             Assert.AreEqual(expected, result, "La méthode ToString() ne retourne pas le format attendu.");
         }
         [TestMethod]
-        public void AjouterMouvement_() 
+        public void AjouterMouvement_AjoutMvt() 
         { 
+            Type_ type1 = new Type_("001", "Type A", '+');
+            Mouvement mvt = new Mouvement(DateTime.Now, 100m, type1);
+            Compte compte = new Compte(1, "Test", 1000m, 500m);
+            compte.AjouterMouvement(mvt);
+            Assert.AreEqual(1, compte.Mouvements.Count, "Le mouvement n'a pas été ajouté correctement.");
+
         }
 
         
