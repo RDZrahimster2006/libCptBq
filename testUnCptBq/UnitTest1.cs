@@ -261,7 +261,7 @@ namespace testUnCptBq
         {
             // Arranger
             Type banqueType = typeof(Banque);
-            
+
 
             // Agir
             ConstructorInfo constructeur = banqueType.GetConstructor(Type.EmptyTypes);
@@ -293,7 +293,89 @@ namespace testUnCptBq
             // Assert
             Assert.AreEqual(expected, result, "La méthode ToString() ne retourne pas le format attendu.");
         }
+        [TestMethod]
+        public void RendCompte_CompteExiste_RetourneCompteTested()
+        {
+            // Arranger
+            Banque banque = new Banque();
+            Compte compte = new Compte(123, "Test", 1000m, 500m);
+            banque.AjouteCompte(compte);
+            // Agir
+            Compte resultat = banque.RendCompte(123);
+            // Assert
+            Assert.IsNotNull(resultat, "Le compte devrait être trouvé");
+            Assert.AreEqual(compte, resultat, "Le compte retourné ne correspond pas au compte ajouté");
+        }
+        [TestMethod]
+        public void GetTypes_ReturnsCorrectTypes_AfterAddingTypesTested()
+        {
+            // Arrange
+            Banque banque = new Banque();
+            Type_ type1 = new Type_("001", "Type1", '+');
+            Type_ type2 = new Type_("002", "Type2", '+');
+            // Agir
+            banque.AjouterType(type1);
+            banque.AjouterType(type2);
+            var types = banque.MesTypes;
+            // Assert
+            Assert.AreEqual(2, types.Count, "Le nombre de types dans la banque est incorrect");
+            Assert.IsTrue(types.Contains(type1), "Le type1 n'a pas été ajouté correctement");
+            Assert.IsTrue(types.Contains(type2), "Le type2 n'a pas été ajouté correctement");
+        }
+        [TestMethod]
+        public void ClasseMouvementExiste()
+        {
+            //Arranger
+            Type MouvementType = typeof(Mouvement);
+            //Auditer
+            Assert.IsNotNull(MouvementType, "La classe Mouvement n'existe pas.");
+        }
+        [TestMethod]
+        public void ConstructeurMouvementExiste()
+        {
+            // Arranger
+            Type mouvementType = typeof(Mouvement);
+            Type[] parametersTypes = new Type[] { typeof(DateTime), typeof(decimal), typeof(Type_) };
+            // Agir
+            ConstructorInfo constructeur = mouvementType.GetConstructor(parametersTypes);
+            // Assert
+            Assert.IsNotNull(constructeur, "Le constructeur Mouvement(DateTime dateMvt, decimal montant, Type_ leType) n'existe pas.");
+        }
+        [TestMethod] 
+        public void ClasseTypeExiste()
+        {
+            //Arranger
+            Type typeType = typeof(Type_);
+            //Auditer
+            Assert.IsNotNull(typeType, "La classe Type_ n'existe pas.");
+        }
+        [TestMethod]
+        public void ConstructeurTypeExiste()
+        {
+            // Arranger
+            Type typeType = typeof(Type_);
+            Type[] parametersTypes = new Type[] { typeof(string), typeof(string), typeof(char) };
+            // Agir
+            ConstructorInfo constructeur = typeType.GetConstructor(parametersTypes);
+            // Assert
+            Assert.IsNotNull(constructeur, "Le constructeur Type_(string code, string libelle, char sens) n'existe pas.");
+        }
+        [TestMethod]
+        public void ToString_ReturnsFormatType()
+        {
+            // Arranger
+            Type_ type = new Type_("001", "Type A", '+');
+            string expected = "Code: 001, Libellé: Type A, Sens: +";
+            // Agir
+            string result = type.ToString();
+            // Assert
+            Assert.AreEqual(expected, result, "La méthode ToString() ne retourne pas le format attendu.");
+        }
+        [TestMethod]
+        public void AjouterMouvement_() 
+        { 
+        }
 
-
+        
     }
 }

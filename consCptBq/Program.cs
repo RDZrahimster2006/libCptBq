@@ -31,6 +31,10 @@ namespace consCptBq
             b.AjouteCompte(1245, "dutronc", 4500, -500);
 
             Console.WriteLine(b.compteMax().ToString());
+            Banque b1 = new Banque();
+            b1.AjouterType("ch", "chèque débité", '-');
+            b1.ToString();
+
         }
     }
 }

@@ -11,15 +11,23 @@ namespace libCptBq
     {
 
         private List<Compte> comptes;
+        private List<Type_> mesTypes;
         public List<Compte>Comptes 
         {
         get { return comptes; } 
         set { comptes = value; }
         }
 
+        public List<Type_> MesTypes
+        {
+            get { return mesTypes; }
+            set { mesTypes = value; }
+        }
+
         public Banque()
         {
             comptes = new List<Compte>();
+            mesTypes = new List<Type_>();
         }
         public void AjouteCompte(Compte c)
         {
@@ -29,6 +37,15 @@ namespace libCptBq
         {
             Compte nouveauCompte = new Compte(numero, nom, solde, decouvertAutorise);
             comptes.Add(nouveauCompte);
+        }
+
+        public void AjouterType(string code, string libelle, char sens)
+        {
+            this.mesTypes.Add(new Type_(code, libelle, sens));
+        }
+        public void AjouterType(Type_ unType)
+        {
+            this.mesTypes.Add(unType);
         }
         public Compte compteMax()
         {
@@ -55,6 +72,27 @@ namespace libCptBq
             }
             return str;
         }
-       
+        public Compte RendCompte(int numero)
+        {
+            foreach (var compte in comptes)
+            {
+                if (compte.Numero == numero)
+                {
+                    return compte;
+                }
+            }
+             return null;          
+        }
+       public string GetTypes(string libelle)
+       {   string str = "";
+            foreach (var type in mesTypes)
+            {
+                if (type.Libelle == libelle)
+                {
+                    str += type.ToString() + "\n";
+                }
+            }
+            return str;
+       }
     }
 }

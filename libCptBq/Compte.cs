@@ -14,7 +14,8 @@ namespace libCptBq
         private int numero;
         private string nom;
         private decimal solde;
-        private decimal decouvertAutorise; // valeur négative
+        private decimal decouvertAutorise;
+        private List<Mouvement> mouvements = new List<Mouvement>();
 
         /// <summary>
         /// Propriétés implémentées automatiquement
@@ -39,6 +40,11 @@ namespace libCptBq
             get { return decouvertAutorise; }
             set { decouvertAutorise = value; }
         }
+        public List<Mouvement> Mouvements
+        {
+            get { return mouvements; }
+            set { mouvements = value; }
+        }
 
 
         /// <summary>
@@ -54,6 +60,7 @@ namespace libCptBq
             this.nom = nom;
             this.solde = solde;
             this.decouvertAutorise = decouvertAutorise;
+            this.mouvements = new List<Mouvement>();
         }
         /// <summary>
         /// Constructeur de compte par défaut
@@ -143,6 +150,10 @@ namespace libCptBq
                 return true;
             }
             return false;
+        }
+        public void AjouterMouvement(Mouvement m1)
+        {
+            Mouvements.Add(m1);
         }
 
     }
